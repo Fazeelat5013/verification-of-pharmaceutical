@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Company Registration</h3>
+{% if profile and profile.approved %}
+  <div class="alert alert-success">Approved ✔</div>
+{% elif profile %}
+  <div class="alert alert-warning">Pending approval ⏳</div>
+{% endif %}
+<form method="post" enctype="multipart/form-data" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Company Name</label>
+    <input class="form-control" name="company_name" value="{{ profile.company_name if profile else '' }}" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Owner Name</label>
+    <input class="form-control" name="owner_name" value="{{ profile.owner_name if profile else '' }}" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">CNIC</label>
+    <input class="form-control" name="cnic" value="{{ profile.cnic if profile else '' }}" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Drug Authority Certificate No</label>
+    <input class="form-control" name="cert_no" value="{{ profile.cert_no if profile else '' }}" required>
+  </div>
+  <div class="col-md-12">
+    <label class="form-label">Certificate Image</label>
+    <input class="form-control" type="file" name="cert_image" accept="image/*">
+    {% if profile and profile.cert_image %}
+      <small>Uploaded: <a target="_blank" href="{{ url_for('uploads', name=profile.cert_image) }}">{{ profile.cert_image }}</a></small>
+    {% endif %}
+  </div>
+  <div class="col-12"><button class="btn btn-primary" type="submit">Submit</button></div>
+</form>
+{% endblock %}

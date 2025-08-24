@@ -1,0 +1,48 @@
+
+{% extends "base.html" %}
+{% block title %}Search Medicines{% endblock %}
+{% block content %}
+<h3 class="mb-3"><i class="fas fa-search me-2"></i>Advanced Search</h3>
+<form class="row g-2 mb-3">
+  <div class="col-md-4">
+    <input class="form-control" name="q" placeholder="Name or formula" value="{{ q or '' }}">
+  </div>
+  <div class="col-md-3">
+    <input class="form-control" name="batch" placeholder="Batch no" value="{{ batch_no or '' }}">
+  </div>
+  <div class="col-md-3">
+    <input class="form-control" name="company" placeholder="Company" value="{{ company or '' }}">
+  </div>
+  <div class="col-md-2 d-grid">
+    <button class="btn btn-primary">Search</button>
+  </div>
+</form>
+
+{% if results is not none %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Batch</th>
+      <th>Company</th>
+      <th>Approved</th>
+      <th>Expiry</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for m in results %}
+    <tr>
+      <td>{{ m.name }}</td>
+      <td>{{ m.batch_no }}</td>
+      <td>{{ m.company.company_name if m.company else '' }}</td>
+      <td>{{ m.approved_date or '-' }}</td>
+      <td>
+        {% set exp = m.__dict__.get('expiry_date') %}
+        {{ exp or '-' }}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

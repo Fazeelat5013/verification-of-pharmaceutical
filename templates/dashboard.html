@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Verify Pharma{% endblock %}
+{% block content %}
+<h3><i class="fas fa-tachometer-alt me-3"></i>Dashboard</h3>
+
+{% if role == "COMPANY" %}
+<div class="row">
+  <div class="col-md-6 mb-4">
+    <div class="card h-100">
+      <div class="card-body text-center">
+        <div class="mb-3">
+          <i class="fas fa-building fa-4x text-primary"></i>
+        </div>
+        <h5 class="card-title">Company Registration</h5>
+        <p class="card-text">Register your pharmaceutical company and get verified to start managing your medicine database.</p>
+        <a class="btn btn-primary" href="{{ url_for('company_register') }}">
+          <i class="fas fa-plus-circle me-2"></i>Register Company
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6 mb-4">
+    <div class="card h-100">
+      <div class="card-body text-center">
+        <div class="mb-3">
+          <i class="fas fa-pills fa-4x text-success"></i>
+        </div>
+        <h5 class="card-title">Manage Medicines</h5>
+        <p class="card-text">Add, update, and manage your company's medicine inventory with batch numbers and QR codes.</p>
+        <a class="btn btn-success" href="{{ url_for('company_medicines') }}">
+          <i class="fas fa-cogs me-2"></i>Manage Medicines
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% elif role == "ADMIN" %}
+<div class="alert alert-info">
+  <i class="fas fa-user-shield me-2"></i>
+  <strong>Administrator Panel</strong> - You have full system access and oversight capabilities.
+</div>
+
+<div class="row">
+  <div class="col-md-6 mb-4">
+    <div class="card border-danger">
+      <div class="card-body text-center">
+        <div class="mb-3">
+          <i class="fas fa-building fa-4x text-danger"></i>
+        </div>
+        <h5 class="card-title">Review Companies</h5>
+        <p class="card-text">Approve or reject company registration requests and manage existing pharmaceutical companies.</p>
+        <a class="btn btn-danger" href="{{ url_for('admin_companies') }}">
+          <i class="fas fa-user-check me-2"></i>Review Companies
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6 mb-4">
+    <div class="card border-warning">
+      <div class="card-body text-center">
+        <div class="mb-3">
+          <i class="fas fa-capsules fa-4x text-warning"></i>
+        </div>
+        <h5 class="card-title">All Medicines</h5>
+        <p class="card-text">View and manage all medicines in the system across all registered pharmaceutical companies.</p>
+        <a class="btn btn-warning" href="{{ url_for('admin_medicines') }}">
+          <i class="fas fa-list me-2"></i>View All Medicines
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% else %}
+<div class="alert alert-success">
+  <i class="fas fa-user me-2"></i>
+  <strong>User Dashboard</strong> - Access medicine verification tools and services.
+</div>
+
+<div class="row">
+  <div class="col-md-6 mb-4">
+    <div class="card border-success">
+      <div class="card-body text-center">
+        <div class="mb-3">
+          <i class="fas fa-search fa-4x text-success"></i>
+        </div>
+        <h5 class="card-title">Verify Medicine</h5>
+        <p class="card-text">Verify medicine authenticity by entering batch numbers or uploading QR code images.</p>
+        <a class="btn btn-success" href="{{ url_for('verify') }}">
+          <i class="fas fa-shield-alt me-2"></i>Verify Medicine
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6 mb-4">
+    <div class="card border-primary">
+      <div class="card-body text-center">
+        <div class="mb-3">
+          <i class="fas fa-qrcode fa-4x text-primary"></i>
+        </div>
+        <h5 class="card-title">Live QR Scanner</h5>
+        <p class="card-text">Use your device camera to scan QR codes in real-time for instant medicine verification.</p>
+        <a class="btn btn-primary" href="{{ url_for('verify_live') }}">
+          <i class="fas fa-camera me-2"></i>Live QR Scan
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5><i class="fas fa-info-circle me-2"></i>Quick Help</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h6><i class="fas fa-question-circle me-2 text-primary"></i>How to verify a medicine?</h6>
+            <p class="small">Enter the batch number from your medicine package or scan the QR code using our live scanner.</p>
+          </div>
+          <div class="col-md-6">
+            <h6><i class="fas fa-phone me-2 text-success"></i>Need assistance?</h6>
+            <p class="small">Contact our support team at +923226433945 or email medicinev12@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% if current_user.is_authenticated and current_user.role == 'ADMIN' %}
+  <h2>Admin Reports</h2>
+  {% if admin_stats %}
+  <div class="cards">
+    <div class="card">Total Companies: {{ admin_stats.total_companies }}</div>
+    <div class="card">Approved Companies: {{ admin_stats.approved_companies }}</div>
+    <div class="card">Total Medicines: {{ admin_stats.total_medicines }}</div>
+    <div class="card">Expiring ≤30d: {{ admin_stats.expiring['30'] }} | ≤60d: {{ admin_stats.expiring['60'] }} | ≤90d: {{ admin_stats.expiring['90'] }}</div>
+    <div class="card">Top Verifications: {{ admin_stats.top_company.name or '—' }} ({{ admin_stats.top_company.count }})</div>
+  
+{% if current_user.role == 'ADMIN' %}
+<div class="card mt-3">
+  <div class="card-body">
+    <h3 class="card-title">Admin Controls</h3>
+    <a href="{{ url_for('admin_companies') }}" class="btn btn-primary me-2 mb-2">Manage Companies</a>
+    <a href="{{ url_for('admin_medicines') }}" class="btn btn-primary me-2 mb-2">Manage Medicines</a>
+    <a href="{{ url_for('admin_medicines_new') }}" class="btn btn-success me-2 mb-2">Add New Medicine</a>
+    <a href="{{ url_for('admin_stats') }}" class="btn btn-info me-2 mb-2">View Analytics</a>
+    <a href="{{ url_for('admin_reports') }}" class="btn btn-warning me-2 mb-2">View Reports</a>
+  </div>
+</div>
+{% endif %}
+</div>
+  <h3>Per-Company Medicines</h3>
+  <table>
+    <tr><th>Company</th><th>Medicines</th></tr>
+    {% for cid, cname, mcount in admin_stats.per_company %}
+      <tr><td>{{ cname }}</td><td>{{ mcount }}</td></tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>Go to <a href="{{ url_for('admin_stats') }}">Admin Stats</a></p>
+  {% endif %}
+{% endif %}

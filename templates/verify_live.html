@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live QR Scan</title>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body>
+    <h1>Live QR Scan</h1>
+    <p>Allow camera access and point to a QR that contains the medicine batch number.</p>
+
+    <!-- Existing content preserved -->
+    <div id="reader" style="width:300px;"></div>
+
+    <form id="scanForm" method="GET" action="/verify">
+        <input type="hidden" name="batch_no" id="batchInput">
+    </form>
+
+    <script>
+        function onScanSuccess(decodedText, decodedResult) {
+            console.log(`Scan result: ${decodedText}`, decodedResult);
+            document.getElementById("batchInput").value = decodedText;
+            document.getElementById("scanForm").submit();
+        }
+
+        function onScanError(errorMessage) {
+            console.warn(`QR error = ${errorMessage}`);
+        }
+
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader",
+            { fps: 10, qrbox: 250 }
+        );
+        html5QrcodeScanner.render(onScanSuccess, onScanError);
+    </script>
+</body>
+</html>

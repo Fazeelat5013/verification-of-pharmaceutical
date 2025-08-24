@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Edit Medicine</h2>
+<form method="post" enctype="multipart/form-data">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" name="name" value="{{ medicine.name }}" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label>Formula</label>
+    <input type="text" name="formula" value="{{ medicine.formula }}" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label>Batch No</label>
+    <input type="text" name="batch_no" value="{{ medicine.batch_no }}" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label>Approved Date</label>
+    <input type="date" name="approved_date" value="{{ medicine.approved_date }}" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label>Expiry Date</label>
+    <input type="date" name="expiry_date" value="{{ medicine.expiry_date }}" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label>Company</label>
+    <select name="company_id" class="form-control" required>
+      {% for c in companies %}
+      <option value="{{ c.id }}" {% if c.id == medicine.company_id %}selected{% endif %}>{{ c.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label>QR Code Image (leave blank to keep existing)</label>
+    <input type="file" name="qr_image" class="form-control">
+    {% if medicine.qr_image %}
+      <p>Current: <img src="{{ url_for('static', filename=medicine.qr_image) }}" height="100"></p>
+    {% endif %}
+  </div>
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>
+{% endblock %}

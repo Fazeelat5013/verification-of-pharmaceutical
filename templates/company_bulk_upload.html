@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+{% block title %}Bulk Upload Medicines{% endblock %}
+{% block content %}
+<h3 class="mb-3"><i class="fas fa-file-upload me-2"></i>Bulk Upload Medicines (CSV)</h3>
+<p class="text-muted">Upload a CSV with columns: <code>name,formula,approved_date,expiry_date,batch_no</code>. Dates in <code>YYYY-MM-DD</code> format.</p>
+<form method="post" enctype="multipart/form-data">
+  <div class="mb-3">
+    <input class="form-control" type="file" name="file" accept=".csv" required>
+  </div>
+  <button class="btn btn-primary">Upload</button>
+  <a class="btn btn-outline-secondary" href="{{ url_for('company_medicines') }}">Back</a>
+</form>
+<hr>
+<h6>Sample CSV</h6>
+<pre class="bg-light p-3 small">name,formula,approved_date,expiry_date,batch_no
+Paracetamol,Acetaminophen,2024-10-02,2026-10-01,B123
+Cough Syrup,Dextromethorphan,2024-06-10,2025-12-31,B124</pre>
+{% endblock %}

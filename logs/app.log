@@ -1,0 +1,496 @@
+2025-08-16 05:08:26,354 [INFO] app: Added expiry_date column to medicines table
+2025-08-16 05:12:03,770 [WARNING] app: 404: /favicon.ico
+2025-08-16 05:20:06,791 [WARNING] app: 404: /favicon.ico
+2025-08-18 03:40:07,303 [INFO] app: Email sent to ['aansarabbas01@gmail.com']
+2025-08-19 04:23:11,670 [ERROR] app: Exception on / [GET]
+Traceback (most recent call last):
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 389, in connect_check_health
+    sock = self.retry.call_with_retry(
+        lambda: self._connect(), lambda error: self.disconnect(error)
+    )
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\retry.py", line 105, in call_with_retry
+    return do()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 390, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 803, in _connect
+    raise err
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 787, in _connect
+    sock.connect(socket_address)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1187, in _check_request_limit
+    raise e
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1169, in _check_request_limit
+    self.__evaluate_limits(endpoint, all_limits)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1101, in __evaluate_limits
+    if not method(lim.limit, *args, **kwargs):
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\strategies.py", line 157, in hit
+    self.storage.incr(
+    ~~~~~~~~~~~~~~~~~^
+        item.key_for(*identifiers),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        item.get_expiry(),
+        ^^^^^^^^^^^^^^^^^^
+        amount=cost,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\storage\base.py", line 25, in inner
+    return fn(*args, **kwargs)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\storage\redis.py", line 224, in incr
+    return int(self.lua_incr_expire([key], [expiry, amount]))
+               ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5702, in __call__
+    return client.evalsha(self.sha, len(keys), *args)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5911, in evalsha
+    return self._evalsha("EVALSHA", sha, numkeys, *keys_and_args)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5895, in _evalsha
+    return self.execute_command(command, sha, numkeys, *keys_and_args)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\client.py", line 621, in execute_command
+    return self._execute_command(*args, **options)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\client.py", line 627, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\utils.py", line 195, in wrapper
+    return func(*args, **kwargs)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 1533, in get_connection
+    connection.connect()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 380, in connect
+    self.connect_check_health(check_health=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 397, in connect_check_health
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+2025-08-19 04:23:15,787 [ERROR] app: Exception on / [GET]
+Traceback (most recent call last):
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 389, in connect_check_health
+    sock = self.retry.call_with_retry(
+        lambda: self._connect(), lambda error: self.disconnect(error)
+    )
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\retry.py", line 105, in call_with_retry
+    return do()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 390, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 803, in _connect
+    raise err
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 787, in _connect
+    sock.connect(socket_address)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1187, in _check_request_limit
+    raise e
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1169, in _check_request_limit
+    self.__evaluate_limits(endpoint, all_limits)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1101, in __evaluate_limits
+    if not method(lim.limit, *args, **kwargs):
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\strategies.py", line 157, in hit
+    self.storage.incr(
+    ~~~~~~~~~~~~~~~~~^
+        item.key_for(*identifiers),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        item.get_expiry(),
+        ^^^^^^^^^^^^^^^^^^
+        amount=cost,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\storage\base.py", line 25, in inner
+    return fn(*args, **kwargs)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\storage\redis.py", line 224, in incr
+    return int(self.lua_incr_expire([key], [expiry, amount]))
+               ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5702, in __call__
+    return client.evalsha(self.sha, len(keys), *args)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5911, in evalsha
+    return self._evalsha("EVALSHA", sha, numkeys, *keys_and_args)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5895, in _evalsha
+    return self.execute_command(command, sha, numkeys, *keys_and_args)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\client.py", line 621, in execute_command
+    return self._execute_command(*args, **options)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\client.py", line 627, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\utils.py", line 195, in wrapper
+    return func(*args, **kwargs)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 1533, in get_connection
+    connection.connect()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 380, in connect
+    self.connect_check_health(check_health=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 397, in connect_check_health
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+2025-08-19 04:24:20,867 [ERROR] app: Exception on / [GET]
+Traceback (most recent call last):
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 389, in connect_check_health
+    sock = self.retry.call_with_retry(
+        lambda: self._connect(), lambda error: self.disconnect(error)
+    )
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\retry.py", line 105, in call_with_retry
+    return do()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 390, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 803, in _connect
+    raise err
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 787, in _connect
+    sock.connect(socket_address)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1187, in _check_request_limit
+    raise e
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1169, in _check_request_limit
+    self.__evaluate_limits(endpoint, all_limits)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1101, in __evaluate_limits
+    if not method(lim.limit, *args, **kwargs):
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\strategies.py", line 157, in hit
+    self.storage.incr(
+    ~~~~~~~~~~~~~~~~~^
+        item.key_for(*identifiers),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        item.get_expiry(),
+        ^^^^^^^^^^^^^^^^^^
+        amount=cost,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\storage\base.py", line 25, in inner
+    return fn(*args, **kwargs)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\storage\redis.py", line 224, in incr
+    return int(self.lua_incr_expire([key], [expiry, amount]))
+               ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5702, in __call__
+    return client.evalsha(self.sha, len(keys), *args)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5911, in evalsha
+    return self._evalsha("EVALSHA", sha, numkeys, *keys_and_args)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5895, in _evalsha
+    return self.execute_command(command, sha, numkeys, *keys_and_args)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\client.py", line 621, in execute_command
+    return self._execute_command(*args, **options)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\client.py", line 627, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\utils.py", line 195, in wrapper
+    return func(*args, **kwargs)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 1533, in get_connection
+    connection.connect()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 380, in connect
+    self.connect_check_health(check_health=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 397, in connect_check_health
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+2025-08-19 04:25:14,013 [ERROR] app: Exception on / [GET]
+Traceback (most recent call last):
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 389, in connect_check_health
+    sock = self.retry.call_with_retry(
+        lambda: self._connect(), lambda error: self.disconnect(error)
+    )
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\retry.py", line 105, in call_with_retry
+    return do()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 390, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 803, in _connect
+    raise err
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 787, in _connect
+    sock.connect(socket_address)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1187, in _check_request_limit
+    raise e
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1169, in _check_request_limit
+    self.__evaluate_limits(endpoint, all_limits)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1101, in __evaluate_limits
+    if not method(lim.limit, *args, **kwargs):
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\strategies.py", line 157, in hit
+    self.storage.incr(
+    ~~~~~~~~~~~~~~~~~^
+        item.key_for(*identifiers),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        item.get_expiry(),
+        ^^^^^^^^^^^^^^^^^^
+        amount=cost,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\storage\base.py", line 25, in inner
+    return fn(*args, **kwargs)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\storage\redis.py", line 224, in incr
+    return int(self.lua_incr_expire([key], [expiry, amount]))
+               ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5702, in __call__
+    return client.evalsha(self.sha, len(keys), *args)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5911, in evalsha
+    return self._evalsha("EVALSHA", sha, numkeys, *keys_and_args)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5895, in _evalsha
+    return self.execute_command(command, sha, numkeys, *keys_and_args)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\client.py", line 621, in execute_command
+    return self._execute_command(*args, **options)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\client.py", line 627, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\utils.py", line 195, in wrapper
+    return func(*args, **kwargs)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 1533, in get_connection
+    connection.connect()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 380, in connect
+    self.connect_check_health(check_health=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 397, in connect_check_health
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+2025-08-19 04:32:12,321 [ERROR] app: Exception on / [GET]
+Traceback (most recent call last):
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 389, in connect_check_health
+    sock = self.retry.call_with_retry(
+        lambda: self._connect(), lambda error: self.disconnect(error)
+    )
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\retry.py", line 105, in call_with_retry
+    return do()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 390, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 803, in _connect
+    raise err
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 787, in _connect
+    sock.connect(socket_address)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1187, in _check_request_limit
+    raise e
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1169, in _check_request_limit
+    self.__evaluate_limits(endpoint, all_limits)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1101, in __evaluate_limits
+    if not method(lim.limit, *args, **kwargs):
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\strategies.py", line 157, in hit
+    self.storage.incr(
+    ~~~~~~~~~~~~~~~~~^
+        item.key_for(*identifiers),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        item.get_expiry(),
+        ^^^^^^^^^^^^^^^^^^
+        amount=cost,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\storage\base.py", line 25, in inner
+    return fn(*args, **kwargs)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\storage\redis.py", line 224, in incr
+    return int(self.lua_incr_expire([key], [expiry, amount]))
+               ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5702, in __call__
+    return client.evalsha(self.sha, len(keys), *args)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5911, in evalsha
+    return self._evalsha("EVALSHA", sha, numkeys, *keys_and_args)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5895, in _evalsha
+    return self.execute_command(command, sha, numkeys, *keys_and_args)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\client.py", line 621, in execute_command
+    return self._execute_command(*args, **options)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\client.py", line 627, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\utils.py", line 195, in wrapper
+    return func(*args, **kwargs)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 1533, in get_connection
+    connection.connect()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 380, in connect
+    self.connect_check_health(check_health=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 397, in connect_check_health
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+2025-08-19 04:32:16,421 [ERROR] app: Exception on / [GET]
+Traceback (most recent call last):
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 389, in connect_check_health
+    sock = self.retry.call_with_retry(
+        lambda: self._connect(), lambda error: self.disconnect(error)
+    )
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\retry.py", line 105, in call_with_retry
+    return do()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 390, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 803, in _connect
+    raise err
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 787, in _connect
+    sock.connect(socket_address)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1187, in _check_request_limit
+    raise e
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1169, in _check_request_limit
+    self.__evaluate_limits(endpoint, all_limits)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\flask_limiter\extension.py", line 1101, in __evaluate_limits
+    if not method(lim.limit, *args, **kwargs):
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\strategies.py", line 157, in hit
+    self.storage.incr(
+    ~~~~~~~~~~~~~~~~~^
+        item.key_for(*identifiers),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        item.get_expiry(),
+        ^^^^^^^^^^^^^^^^^^
+        amount=cost,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\storage\base.py", line 25, in inner
+    return fn(*args, **kwargs)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\limits\storage\redis.py", line 224, in incr
+    return int(self.lua_incr_expire([key], [expiry, amount]))
+               ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5702, in __call__
+    return client.evalsha(self.sha, len(keys), *args)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5911, in evalsha
+    return self._evalsha("EVALSHA", sha, numkeys, *keys_and_args)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\commands\core.py", line 5895, in _evalsha
+    return self.execute_command(command, sha, numkeys, *keys_and_args)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\client.py", line 621, in execute_command
+    return self._execute_command(*args, **options)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\client.py", line 627, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\utils.py", line 195, in wrapper
+    return func(*args, **kwargs)
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 1533, in get_connection
+    connection.connect()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 380, in connect
+    self.connect_check_health(check_health=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Fazeelat Mazhar (5013 A )\venv\Lib\site-packages\redis\connection.py", line 397, in connect_check_health
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.

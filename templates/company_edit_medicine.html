@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Edit Medicine #{{ med.id }}</h3>
+<form method="post" enctype="multipart/form-data" class="row g-3">
+  <div class="col-md-4">
+    <label class="form-label">Medicine Name</label>
+    <input class="form-control" name="name" value="{{ med.name }}" required>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Formula</label>
+    <input class="form-control" name="formula" value="{{ med.formula or '' }}">
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Approved Date</label>
+    <input class="form-control" type="date" name="approved_date" value="{{ med.approved_date }}">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Batch No (unique)</label>
+    <input class="form-control" name="batch_no" value="{{ med.batch_no }}" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">QR Image (replace)</label>
+    <input class="form-control" type="file" name="qr_image" accept="image/*">
+    {% if med.qr_image %}
+      <small>Current: <a target="_blank" href="{{ url_for('uploads', name=med.qr_image) }}">{{ med.qr_image }}</a></small>
+    {% endif %}
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a class="btn btn-outline-secondary" href="{{ url_for('company_medicines') }}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

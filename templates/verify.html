@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Verify Medicine - Verify Pharma{% endblock %}
+{% block content %}
+<h3><i class="fas fa-shield-alt me-3"></i>Verify Medicine</h3>
+
+<div class="alert alert-info">
+  <i class="fas fa-info-circle me-2"></i>
+  <strong>Medicine Verification:</strong> Use batch number verification or QR code scanning to authenticate your medicines instantly.
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card mb-4 border-success">
+      <div class="card-header bg-success text-white">
+        <i class="fas fa-keyboard me-2"></i>By Batch Number
+      </div>
+      <div class="card-body">
+        <form method="post">
+          <input type="hidden" name="mode" value="batch">
+          <div class="mb-3">
+            <label class="form-label">
+              <i class="fas fa-barcode me-2"></i>Batch Number
+            </label>
+            <input class="form-control form-control-lg" name="batch_no" placeholder="Enter batch number (e.g., BT2024001)" required>
+            <div class="form-text">
+              <i class="fas fa-lightbulb me-1"></i>Find the batch number on your medicine package
+            </div>
+          </div>
+          <button class="btn btn-success w-100" type="submit">
+            <i class="fas fa-search me-2"></i>Verify by Batch
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <div class="card mb-4 border-primary">
+      <div class="card-header bg-primary text-white">
+        <i class="fas fa-upload me-2"></i>By QR Image Upload
+      </div>
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+          <input type="hidden" name="mode" value="qr">
+          <div class="mb-3">
+            <label class="form-label">
+              <i class="fas fa-qrcode me-2"></i>Upload QR Image
+            </label>
+            <input class="form-control form-control-lg" type="file" name="qr_image" accept="image/*">
+            <div class="form-text">
+              <i class="fas fa-camera me-1"></i>Upload a clear image of the QR code
+            </div>
+          </div>
+          <button class="btn btn-primary w-100 mb-3" type="submit">
+            <i class="fas fa-cloud-upload-alt me-2"></i>Verify by Upload
+          </button>
+        </form>
+        
+        <div class="text-center">
+          <hr>
+          <p class="text-muted mb-2">
+            <i class="fas fa-mobile-alt me-2"></i>Prefer live scanning?
+          </p>
+          <a class="btn btn-outline-primary" href="{{ url_for('verify_live') }}">
+            <i class="fas fa-camera me-2"></i>Use Live QR Scanner
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if msg %}
+<div class="alert alert-warning alert-dismissible fade show">
+  <i class="fas fa-exclamation-triangle me-2"></i>{{ msg }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+{% endif %}
+
+{% if result %}
+  {% set recall = (db_session.execute(sqlalchemy.select(Recall).where(Recall.medicine_id==result.id)).scalar_one_or_none()) if False else None %}
+<div class="card border-success">
+  <div class="card-header bg-success text-white">
+    <i class="fas fa-check-circle me-2"></i>Medicine Verification Results
+  </div>
+    <div class="card-body">
+      <p><strong>Name:</strong> {{ result.name }}</p>
+      <p><strong>Formula:</strong> {{ result.formula or '-' }}</p>
+      <p><strong>Approved Date:</strong> {{ result.approved_date or '-' }}</p>
+      <p><strong>Batch No:</strong> {{ result.batch_no }}</p>
+      <p><strong>Company:</strong> {{ result.company.company_name }}</p>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}
+
+{% if recall_info and recall_info.recalled %}
+<div class="alert alert-danger">⚠️ This medicine is RECALLED. Reason: {{ recall_info.reason or 'No reason provided' }}</div>
+{% endif %}

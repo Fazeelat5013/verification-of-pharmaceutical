@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Verify Pharma - Professional Medicine Authentication{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold pulse" href="{{ url_for('index') }}">Verify Pharma</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="ms-auto d-flex gap-2">
+        {% if current_user.is_authenticated %}
+          <a class="btn btn-primary btn-sm" href="{{ url_for('dashboard') }}">
+            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+          </a>
+          <a class="btn btn-outline-danger btn-sm" href="{{ url_for('logout') }}">
+            <i class="fas fa-sign-out-alt me-1"></i>Logout
+          </a>
+        {% else %}
+          <a class="btn btn-primary btn-sm" href="{{ url_for('login') }}">
+            <i class="fas fa-sign-in-alt me-1"></i>Login
+          </a>
+          <a class="btn btn-outline-primary btn-sm" href="{{ url_for('signup') }}">
+            <i class="fas fa-user-plus me-1"></i>Sign up
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if current_user.is_authenticated and current_user.is_admin %}<a href="{{ url_for('admin_reports') }}">Reports</a>{% endif %}
+</nav>
+
+<main class="container my-4">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          <i class="fas fa-{% if category == 'success' %}check-circle{% elif category == 'danger' %}exclamation-triangle{% else %}info-circle{% endif %} me-2"></i>
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  
+  {% block content %}{% endblock %}
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4><i class="fas fa-hospital-alt me-2"></i>Verify Pharma</h4>
+      <p>Professional medicine authentication platform ensuring pharmaceutical safety and authenticity worldwide.</p>
+      <p><i class="fas fa-shield-alt me-2"></i>Trusted by healthcare professionals</p>
+    </div>
+    
+    <div class="footer-section">
+      <h4><i class="fas fa-map-marker-alt me-2"></i>Contact Information</h4>
+      <p><i class="fas fa-envelope me-2"></i>medicinev12@gmail.com</p>
+      <p><i class="fas fa-phone me-2"></i>+923226433945</p>
+      <p><i class="fas fa-map-pin me-2"></i>Lahore, Pakistan</p>
+    </div>
+    
+    <div class="footer-section">
+      <h4><i class="fas fa-link me-2"></i>Quick Links</h4>
+      <a href="{{ url_for('verify') }}"><i class="fas fa-search me-2"></i>Verify Medicine</a>
+      <a href="{{ url_for('verify_live') }}"><i class="fas fa-qrcode me-2"></i>QR Scanner</a>
+      <a href="#terms"><i class="fas fa-file-contract me-2"></i>Terms & Conditions</a>
+      <a href="#privacy"><i class="fas fa-user-shield me-2"></i>Privacy Policy</a>
+    </div>
+    
+    <div class="footer-section">
+      <h4><i class="fas fa-users me-2"></i>For Organizations</h4>
+      <a href="{{ url_for('signup') }}"><i class="fas fa-building me-2"></i>Company Registration</a>
+      <a href="{{ url_for('login') }}"><i class="fas fa-user-tie me-2"></i>Admin Portal</a>
+      <a href="#api"><i class="fas fa-code me-2"></i>API Documentation</a>
+      <a href="#support"><i class="fas fa-headset me-2"></i>24/7 Support</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 Verify Pharma. All rights reserved. | Professional Medicine Authentication Platform</p>
+    <p><i class="fas fa-certificate me-2"></i>Licensed & Regulated Healthcare Technology Solution</p>
+  </div>
+</footer>
+
+<!-- Modal for Terms & Conditions -->
+<div class="modal fade" id="termsModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-file-contract me-2"></i>Terms & Conditions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <h6><i class="fas fa-info-circle me-2"></i>Service Agreement</h6>
+        <p>By using Verify Pharma, you agree to our terms of service. This platform is designed for medicine authentication and verification purposes only.</p>
+        
+        <h6><i class="fas fa-shield-alt me-2"></i>Data Protection</h6>
+        <p>We ensure the highest level of data protection and privacy for all users. All verification data is encrypted and stored securely.</p>
+        
+        <h6><i class="fas fa-exclamation-triangle me-2"></i>Disclaimer</h6>
+        <p>While we strive for accuracy, users should always consult healthcare professionals for medical advice. This platform assists in verification but does not replace professional medical consultation.</p>
+        
+        <h6><i class="fas fa-phone me-2"></i>Support</h6>
+        <p>For any queries or support, contact us at medicinev12@gmail.com or +923226433945</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Add smooth scrolling and animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate cards on scroll
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    });
+    
+    cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'all 0.6s ease';
+        observer.observe(card);
+    });
+    
+    // Add loading state to buttons
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', function() {
+            const submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<span class="loading"></span> Processing...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
+        });
+    });
+    
+    // Terms modal trigger
+    document.querySelectorAll('a[href="#terms"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            new bootstrap.Modal(document.getElementById('termsModal')).show();
+        });
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Admin: All Medicines</h3>
+<table class="table table-striped align-middle">
+  <thead>
+    <tr><th>ID</th><th>Name</th><th>Batch</th><th>Company</th><th>Approved Date</th><th>Expiry</th><th>QR</th><th>Actions</th><th>Edit</th></tr>
+  </thead>
+  <tbody>
+    {% for m in meds %}
+    <tr>
+      <td>{{ m.id }}</td>
+      <td>{{ m.name }}</td>
+      <td>{{ m.batch_no }}</td>
+      <td>{{ m.company.company_name if m.company else '-' }}</td>
+      <td>{{ m.approved_date or '-' }}</td>
+      <td>{% set exp = m.__dict__.get('expiry_date') %}{{ exp or '-' }}</td>
+      <td>{% if m.qr_image %}<a target="_blank" href="{{ url_for('uploads', name=m.qr_image) }}">view</a>{% else %}-{% endif %}</td>
+      <td>
+        <form method="post" action="{{ url_for('admin_delete_medicine', mid=m.id) }}">
+          <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+        </form>
+      </td>
+    <td><a href=\"{{ url_for('admin_edit_medicine', mid=m.id) }}\" class=\"btn btn-sm btn-warning\">Edit</a></td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+<hr>
+<h3>Add Medicine (Admin)</h3>
+<form method="post" action="{{ url_for('admin_create_medicine') }}" enctype="multipart/form-data">
+  <label>Name</label><input name="name" required>
+  <label>Formula</label><input name="formula">
+  <label>Batch No</label><input name="batch_no" required>
+  <label>Approved Date</label><input name="approved_date" type="date">
+  <label>Expiry Date</label><input name="expiry_date" type="date">
+  <label>Company</label>
+  <select name="company_id">
+    {% for c in companies or [] %}
+      <option value="{{ c.id }}">{{ c.company_name }}</option>
+    {% endfor %}
+  </select>
+  <label>QR Image</label><input type="file" name="qr_image">
+  <button type="submit">Add</button>
+</form>
+
+<h3>Recall / Delete</h3>
+<ul>
+{% for m in meds %}
+  <li>
+    {{ m.name }} ({{ m.batch_no }}) 
+    <form method="post" action="{{ url_for('admin_recall_medicine', mid=m.id) }}" style="display:inline">
+      <input name="reason" placeholder="reason">
+      <button type="submit">Recall</button>
+    </form>
+    <form method="post" action="{{ url_for('admin_unrecall_medicine', mid=m.id) }}" style="display:inline">
+      <button type="submit">Un-recall</button>
+    </form>
+    <form method="post" action="{{ url_for('admin_delete_medicine', mid=m.id) }}" style="display:inline">
+      <button type="submit">Delete</button>
+    </form>
+  </li>
+{% endfor %}
+</ul>

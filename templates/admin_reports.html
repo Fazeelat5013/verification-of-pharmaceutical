@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Reports</title>
+</head>
+<body>
+    <h1>Admin Reports</h1>
+
+    <!-- Existing content preserved -->
+    <p>Below is the list of medicines and companies:</p>
+
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Medicine ID</th>
+                <th>Batch No</th>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for med in medicines %}
+            <tr>
+                <td>{{ med.id }}</td>
+                <td>{{ med.batch_no }}</td>
+                <td>{{ med.name }}</td>
+                <td>{{ med.company.company_name }}</td>
+                <td>{{ med.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
