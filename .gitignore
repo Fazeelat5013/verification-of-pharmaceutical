@@ -1,0 +1,23 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+ENV/
+
+# Logs
+*.log
+
+# Databases (local only)
+*.db
+
+# Editor/IDE configs
+.vscode/
+*.code-workspace
+
+# Replit
+.replit
+
+# Temporary files
+*.zip
