@@ -9,7 +9,7 @@ from flask_cors import CORS
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-REDIS_URL = "redis://default:ySETjuEBUosMjMdibVxUkCjbGnKiUAJm@redis.railway.internal:6379"
+REDIS_URL =  "redis://default:VKTnvimRaqEsEKiAbNYGnNZBjBbJjtcg@gondola.proxy.rlwy.net:57557"
 from sqlalchemy import create_engine, select, Column, Integer, String, Date, Boolean, Text, ForeignKey, DateTime
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship, scoped_session
 from dotenv import load_dotenv
@@ -52,7 +52,7 @@ app.logger.setLevel(logging.INFO)
 app.logger.addHandler(handler)
 
 # --- Rate Limiting ---
-REDIS_URL = "redis://default:ySETjuEBUosMjMdibVxUkCjbGnKiUAJm@redis.railway.internal:6379"
+REDIS_URL = "redis://default:VKTnvimRaqEsEKiAbNYGnNZBjBbJjtcg@gondola.proxy.rlwy.net:57557"
 
 limiter = Limiter(
     key_func=get_remote_address,
